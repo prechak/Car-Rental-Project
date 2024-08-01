@@ -1,19 +1,23 @@
 "use client";
 
 import CarsFiltersOption from "@/components/Home/CarsFiltersOption";
+import CarsList from "@/components/Home/CarsList";
 import Hero from "@/components/Home/Hero";
 import SearchInput from "@/components/Home/SearchInput";
 import { getCarLists } from "@/services";
 import { UserButton } from "@clerk/nextjs";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [carsList, setCarsList] = useState<any>([]);
+
   useEffect(() => {
     getCarLists_();
   }, []);
 
   const getCarLists_ = async () => {
-    const result = getCarLists();
+    const result: any = await getCarLists();
+    setCarsList(result?.carLists);
     console.log(result);
   };
 
@@ -23,6 +27,7 @@ export default function Home() {
         <Hero />
         <SearchInput />
         <CarsFiltersOption />
+        <CarsList carsList={carsList} />
       </div>
     </>
   );

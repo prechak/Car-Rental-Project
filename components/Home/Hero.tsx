@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Hero() {
   return (
-    <div className="grid grid-col-1 md:grid-cols-2">
+    <div className="grid grid-col-1 md:grid-cols-2 items-center">
       <div>
         <h2 className="text-[40px] md:text-[60px] font-bold">
           Drive a Low-Carbon Society
@@ -17,7 +17,7 @@ function Hero() {
           Explore Cars
         </button>
       </div>
-      <div>
+      <div className="justify-self-center">
         <Image src="/hero.png" alt="hero" width={500} height={500} />
       </div>
     </div>
