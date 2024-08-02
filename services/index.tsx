@@ -3,7 +3,7 @@ import { request, gql } from "graphql-request";
 export const getCarLists = async () => {
   const query = gql`
     query MyQuery {
-      carLists {
+      carLists(last: 35) {
         name
         carBrand
         price

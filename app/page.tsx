@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [carsList, setCarsList] = useState<any>([]);
+  const [carsOrgList, setCarsOrgList] = useState<any>([]);
 
   useEffect(() => {
     getCarLists_();
@@ -18,7 +19,21 @@ export default function Home() {
   const getCarLists_ = async () => {
     const result: any = await getCarLists();
     setCarsList(result?.carLists);
-    console.log(result);
+    setCarsOrgList(result?.carLists);
+  };
+
+  const filterCarList = (brand: string) => {
+    const filterList = carsOrgList.filter(
+      (item: any) => item.carBrand == brand
+    );
+    setCarsList(filterList);
+  };
+
+  const filterCarPrice = (order: any) => {
+    const sortedList = [...carsOrgList].sort((a: any, b: any) =>
+      order == -1 ? a.price - b.price : b.price - a.price
+    );
+    setCarsList(sortedList);
   };
 
   return (
@@ -26,7 +41,11 @@ export default function Home() {
       <div className="p-5 sm:px-10 md:px-20">
         <Hero />
         <SearchInput />
-        <CarsFiltersOption />
+        <CarsFiltersOption
+          carsList={carsOrgList}
+          setBrand={(value: string) => filterCarList(value.toLocaleLowerCase())}
+          setPrice={(value: string) => filterCarPrice(value)}
+        />
         <CarsList carsList={carsList} />
       </div>
     </>
