@@ -24,9 +24,11 @@ export default function RootLayout({
             <NavBar />
             {children}
           </SignedIn>
-          <SignedOut>
-            <SignIn />
-          </SignedOut>
+          <div className="flex h-screen items-center justify-center">
+            <SignedOut>
+              <SignIn />
+            </SignedOut>
+          </div>
         </body>
       </html>
     </ClerkProvider>
