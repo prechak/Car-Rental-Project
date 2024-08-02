@@ -1,6 +1,9 @@
 ## Car Rental Application
 
 A car rental application built with React, Next.js, and Tailwind CSS. It includes features such as a responsive navigation bar, car listing with booking functionality, and a context-based notification system. The application leverages GraphQL for querying data, Hygraph (formerly GraphCMS) as the headless CMS, and Clerk for authentication.
+You can view and use the landing page at https://electic-car-rental-services-m9hseyedc.vercel.app/
+
+
 
 ![](public/Homepage_Screenshot.png)
 
