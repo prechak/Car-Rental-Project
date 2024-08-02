@@ -1,8 +1,10 @@
+import { BookCreatedFlagContext } from "@/context/BookCreatedFlag";
 import { createBooking, getStoreLocation } from "@/services";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 function Form({ car }: any) {
   const [storeLocation, setStoreLocation] = useState<any>([]);
+  const { showToastMsg, setShowToastMsg } = useContext(BookCreatedFlagContext);
   const [formValue, setFormValue] = useState({
     location: "",
     pickUpDate: "",
@@ -46,6 +48,9 @@ function Form({ car }: any) {
     console.log(formValue);
     const resp = await createBooking(formValue);
     console.log(resp);
+    if (resp) {
+      setShowToastMsg(true);
+    }
   };
 
   return (
