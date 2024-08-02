@@ -1,20 +1,34 @@
-# Car Rental Application
-## Overview
+## Car Rental Application
 
-This is a car rental application built with React, Next.js, and Tailwind CSS. It includes features such as a responsive navigation bar, car listing with booking functionality, and a context-based notification system.
+A car rental application built with React, Next.js, and Tailwind CSS. It includes features such as a responsive navigation bar, car listing with booking functionality, and a context-based notification system. The application leverages GraphQL for querying data, Hygraph (formerly GraphCMS) as the headless CMS, and Clerk for authentication.
 
 ![](public/Homepage_Screenshot.png)
 
 
 ## Features
+<details>
+<summary>Responsive Navigation Bar</summary>
 
-- **Responsive Navigation Bar**: Includes links to Home, History, and Contact Us, along with user authentication.
-![](public/Homepage_Responsive_Screenshot.png)
-- **Car Listing**: Displays available cars with options to filter by brand and price.
+![Screenshot](public/Homepage_Responsive_Screenshot.png)
+
+</details>
+
+<details>
+<summary>Booking Modal</summary>
+
 - **Booking Modal**: Allows users to book a selected car.
 ![](public/Modal_Preview_Screenshot.png)
+
+</details>
+
+
+- **Car Listing**: Displays available cars with options to filter by brand and price.
 - **Skeleton Loading**: Shows skeleton loaders while car data is being fetched.
 - **Search Functionality**: Includes a search input for filtering cars by location and date.
+- **GraphQL Integration**: Utilizes GraphQL queries to fetch and manage car data efficiently.
+- **Hygraph CMS**: Manages car data and content using Hygraph.
+- **Clerk Authentication**: Handles user authentication and management.
+
 
 ## Components
 
@@ -112,6 +126,32 @@ Context for managing booking creation status and toast notifications.
 
     Visit `http://localhost:3000` in your browser.
 
+## GraphQL and Hygraph Integration
+
+The application uses GraphQL for efficient data querying and Hygraph as the CMS for managing car data. Ensure your GraphQL schema and Hygraph configurations are properly set up to enable data fetching and management.
+
+### Example GraphQL Query
+
+To fetch car details, you might use a query like:
+
+```bash
+    graphql
+query GetCars {
+  cars {
+    id
+    name
+    price
+    image {
+      url
+    }
+    carRange
+    seat
+    topSpeed
+    carBrand
+  }
+}
+```
+
 ## Usage
 
 1. **Navigation**: Use the `NavBar` component for navigation between Home, History, and Contact Us.
@@ -138,4 +178,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Next.js**: A React framework for server-side rendering.
 - **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
 - **Clerk**: For user authentication.
+- **GraphQ**L: A query language for APIs.
+- **Hygraph**: A CMS for managing content.
 
