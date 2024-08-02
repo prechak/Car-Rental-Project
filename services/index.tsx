@@ -44,6 +44,23 @@ export const getStoreLocation = async () => {
   return await request(MASTER_URL, query);
 };
 
+export const getPublicImage = async () => {
+  const query = gql`
+    query MyQuery {
+      publics {
+        logo {
+          url
+        }
+        hero {
+          url
+        }
+      }
+    }
+  `;
+
+  return await request(MASTER_URL, query);
+};
+
 export const createBooking = async (formValue: any) => {
   if (
     !formValue.carId ||

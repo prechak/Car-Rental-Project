@@ -1,10 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { getPublicImage } from "@/services";
+import CarCardSkelton from "./CarCardSkelton";
 
 function Hero() {
+  const [heroUrl, setHeroUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHeroImage = async () => {
+      try {
+        const result: any = await getPublicImage();
+        // console.log(result);
+
+        const heroData = result?.publics[0]?.hero;
+        setHeroUrl(heroData?.url || null);
+      } catch (error) {
+        console.error("Error fetching hero image:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHeroImage();
+  }, []);
+
   return (
-    <div className="grid grid-col-1 md:grid-cols-2 items-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 items-center">
       <div>
         <h2 className="text-[40px] md:text-[60px] font-bold">
           Drive a Low-Carbon Society
@@ -18,7 +41,11 @@ function Hero() {
         </button>
       </div>
       <div className="justify-self-center">
-        <Image src="/hero.png" alt="hero" width={500} height={500} />
+        {loading ? (
+          <CarCardSkelton />
+        ) : heroUrl ? (
+          <Image src={heroUrl} alt="hero" width={500} height={500} />
+        ) : null}
       </div>
     </div>
   );
