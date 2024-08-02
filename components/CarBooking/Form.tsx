@@ -1,8 +1,29 @@
-import { getStoreLocation } from "@/services";
+import { createBooking, getStoreLocation } from "@/services";
 import React, { useEffect, useState } from "react";
 
-function Form() {
+function Form({ car }: any) {
   const [storeLocation, setStoreLocation] = useState<any>([]);
+  const [formValue, setFormValue] = useState({
+    location: "",
+    pickUpDate: "",
+    dropOffDate: "",
+    pickUpTime: "",
+    dropOffTime: "",
+    contactNumber: "",
+    userName: "ManPhao",
+    carId: "",
+  });
+
+  const today: any = new Date();
+
+  useEffect(() => {
+    if (car) {
+      setFormValue({
+        ...formValue,
+        carId: car.id,
+      });
+    }
+  }, [car]);
 
   useEffect(() => {
     getStoreLocation_();
@@ -10,9 +31,23 @@ function Form() {
 
   const getStoreLocation_ = async () => {
     const resp: any = await getStoreLocation();
-    console.log(resp.storesLocations);
+    // console.log(resp.storesLocations);
     setStoreLocation(resp.storesLocations);
   };
+
+  const handleChange = (event: any) => {
+    setFormValue({
+      ...formValue,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    console.log(formValue);
+    const resp = await createBooking(formValue);
+    console.log(resp);
+  };
+
   return (
     <div>
       <div className="flex flex-col w-full mb-5">
@@ -21,7 +56,7 @@ function Form() {
           className="select 
         select-bordered w-full max-w-lg"
           name="location"
-          // onChange={handleChange}
+          onChange={handleChange}
         >
           <option disabled selected>
             PickUp Location?
@@ -37,8 +72,8 @@ function Form() {
           <label className="text-gray-400">Pick Up Date</label>
           <input
             type="date"
-            // min={today}
-            // onChange={handleChange}
+            min={today}
+            onChange={handleChange}
             placeholder="Type here"
             name="pickUpDate"
             className="input input-bordered w-full max-w-lg"
@@ -48,7 +83,7 @@ function Form() {
           <label className="text-gray-400">Drop Off Date</label>
           <input
             type="date"
-            // onChange={handleChange}
+            onChange={handleChange}
             placeholder="Type here"
             name="dropOffDate"
             className="input input-bordered w-full max-w-lg"
@@ -60,7 +95,7 @@ function Form() {
           <label className="text-gray-400">Pick Up Time</label>
           <input
             type="time"
-            // onChange={handleChange}
+            onChange={handleChange}
             name="pickUpTime"
             placeholder="Type here"
             className="input input-bordered w-full max-w-lg"
@@ -71,7 +106,7 @@ function Form() {
           <input
             type="time"
             name="dropOffTime"
-            // onChange={handleChange}
+            onChange={handleChange}
             placeholder="Type here"
             className="input input-bordered w-full max-w-lg"
           />
@@ -83,7 +118,7 @@ function Form() {
         <input
           type="text"
           placeholder="Type here"
-          // onChange={handleChange}
+          onChange={handleChange}
           name="contactNumber"
           className="input input-bordered w-full max-w-lg"
         />
@@ -93,7 +128,7 @@ function Form() {
         <button
           className="btn bg-blue-500 text-white
 hover:bg-blue-800"
-          // onClick={handleSubmit}
+          onClick={handleSubmit}
         >
           Save
         </button>
