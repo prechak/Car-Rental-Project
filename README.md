@@ -10,7 +10,7 @@ You can view and use the landing page at https://electic-car-rental-services.ver
 
 ## Features
 <details>
-<summary>Responsive Navigation Bar</summary>
+<summary>Responsive: Optimized for all device</summary>
 
 ![Screenshot](public/Homepage_Responsive_Screenshot.png)
 
